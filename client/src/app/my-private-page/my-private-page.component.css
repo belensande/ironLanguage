@@ -1,0 +1,38 @@
+.little-profile {
+  object-fit: cover;
+  object-position: center;
+  height: 80px;
+  width: 80px;
+  border-radius: 3px;
+}
+
+.container-vertically-aligned {
+  display: flex;
+  align-items: center;
+}
+
+.container-vertically-aligned > *:not(:first-child) {
+  margin-left: 5px;
+}
+
+img.flag {
+  width: 17px;
+  height: 15px;
+  margin-right: 3px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.list-group-item {
+  margin-bottom: -2px;
+}
+
+.container-separated-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  font-weight: 700;
+}
