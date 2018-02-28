@@ -15,16 +15,14 @@
     </div>
     <ul class="list-group" *ngIf="currentUser.languagesOffered && currentUser.languagesOffered.length">
       <li class="list-group-item title">Teach</li>
-      <li *ngFor="let language of currentUser.languagesOffered" class="list-group-item container-vertically-aligned">
-        <img class="flag" [src]="BASE_URL + language.flagImgPath" [alt]="language.name" [title]="language.name" />
-        <span>{{language.name}}</span>
+      <li *ngFor="let language of currentUser.languagesOffered" class="list-group-item">
+        {{language}}
       </li>
     </ul>
     <ul class="list-group" *ngIf="currentUser.languagesDemanded && currentUser.languagesDemanded.length">
       <li class="list-group-item title">Learn</li>
-      <li *ngFor="let language of currentUser.languagesDemanded" class="list-group-item container-vertically-aligned">
-        <img class="flag" [src]="BASE_URL + language.flagImgPath" [alt]="language.name" [title]="language.name" />
-        <span>{{language.name}}</span>
+      <li *ngFor="let language of currentUser.languagesDemanded" class="list-group-item">
+        {{language}}
       </li>
     </ul>
   </div>

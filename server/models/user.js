@@ -24,16 +24,16 @@ const userSchema = new Schema({
 	interests: String,
 	city: {
 		type: String,
-		enum: ['Madrid','Barcelona', 'Other'],
+		enum: ['Madrid', 'Barcelona', 'Other'],
         default: 'Other'
 	},
 	languagesOffered: {
-		type: [Schema.Types.ObjectId],
-		ref: 'Language'
+		type: [String],
+		enum: ["English", "French", "Spanish", "German"]	
 	},
 	languagesDemanded: {
-		type: [Schema.Types.ObjectId],
-		ref: 'Language'
+		type: [String],
+		enum: ["English", "French", "Spanish", "German"]	
 	},
 	gender: {
 		type: String,
@@ -47,10 +47,41 @@ const userSchema = new Schema({
 	imageUrl: {
 		type: String,
 		default: '/images/profiles/noimage.jpg'
-	}
+	},
+	relations: {
+		type: [Schema.Types.ObjectId],
+		ref: 'User'
+	},
+	petitions: {
+		type: [Schema.Types.ObjectId],
+		ref: 'User'
+	},
+	messages: [{
+		with: {
+			type: Schema.Types.ObjectId,	//User entero no me deja vale con el id?
+			ref: 'User'
+		},
+		sender: {
+			type: Schema.Types.ObjectId,	//User entero no me deja vale con el id?
+			ref: 'User'
+		},
+		text: {
+			type: String,
+			required: [true, 'Text is mandatory.']
+		},
+		created: {
+			type: Date,
+			default: Date.now()
+		},
+		checked: {
+			type: Boolean,
+			default: false
+		}
+	}]
 }, {
-		timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
-	});
+		timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+		usePushEach: true
+});
 
 const User = mongoose.model("User", userSchema);
 

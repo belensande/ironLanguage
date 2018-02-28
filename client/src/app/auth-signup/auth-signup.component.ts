@@ -27,11 +27,11 @@ export class AuthSignupComponent implements OnInit {
   };
   city: string;
   gender: string;
-  languagesOffered: string[]= [];
+  languagesOffered: string[] = [];
   languagesDemanded: string[] = [];
 
   error: string;
-  languages: any[];
+  languages: string[];
   cities: string[];
   genders: string[];
 
@@ -67,8 +67,8 @@ export class AuthSignupComponent implements OnInit {
             if (user.gender) {
               this.gender= user.gender;
             }            
-            this.languagesOffered = _.pluck(user.languagesOffered, '_id');
-            this.languagesDemanded = _.pluck(user.languagesDemanded, '_id');
+            this.languagesOffered = user.languagesOffered;
+            this.languagesDemanded = user.languagesDemanded;
             this["avatar"] = user.imageUrl;
           } else {
             this.uploader = new FileUploader({
@@ -131,11 +131,11 @@ export class AuthSignupComponent implements OnInit {
       });
   }
 
-  toogleSelectedLanguage(field: string, id: string) {
-    this[field] = _.indexOf(this[field], id) == -1 ? _.union(this[field], [id]) : _.without(this[field], id);
+  toogleSelectedLanguage(field: string, language: string) {
+    this[field] = _.indexOf(this[field], language) == -1 ? _.union(this[field], [language]) : _.without(this[field], language);
   }
 
-  selectedLanguage(field: string, id: string) { return _.indexOf(this[field], id) != -1; }
+  selectedLanguage(field: string, language: string) { return _.indexOf(this[field], language) != -1; }
 
   submit() {
     

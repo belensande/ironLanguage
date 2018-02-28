@@ -27,7 +27,7 @@ export class ProfileSearchComponent implements OnInit {
 
   showForm: boolean = false;
   error: string;
-  languages: any[];
+  languages: string[];
   cities: string[];
   genders: string[];
 
@@ -71,12 +71,12 @@ export class ProfileSearchComponent implements OnInit {
       });
   }
 
-  toogleSelectedLanguage(field: string, id: string) {
-    this[field] = _.indexOf(this[field], id) == -1 ? _.union(this[field], [id]) : _.without(this[field], id);
+  toogleSelectedLanguage(field: string, language: string) {
+    this[field] = _.indexOf(this[field], language) == -1 ? _.union(this[field], [language]) : _.without(this[field], language);
     this.filter();
   }
 
-  selectedLanguage(field: string, id: string) { return _.indexOf(this[field], id) != -1; }
+  selectedLanguage(field: string, language: string) { return _.indexOf(this[field], language) != -1; }
 
   toggleShowForm() {
     this.showForm = !this.showForm;
@@ -118,15 +118,13 @@ export class ProfileSearchComponent implements OnInit {
 
     if (this.languagesOffered.length && this.users.length) {
       this.users = _.filter(this.users, function (user) {
-        const userLanguagesOfferedIds = _.pluck(user.languagesOffered, '_id');
-        return _.difference(this.languagesOffered, userLanguagesOfferedIds).length == 0;
+        return _.difference(this.languagesOffered, user.languagesOffered).length == 0;
       }, this);
     }
 
     if (this.languagesDemanded.length && this.users.length) {
       this.users = _.filter(this.users, function (user) {
-        const userLanguagesDemandedIds = _.pluck(user.languagesDemanded, '_id');
-        return _.difference(this.languagesDemanded, userLanguagesDemandedIds).length == 0;
+        return _.difference(this.languagesDemanded, user.languagesDemanded).length == 0;
       }, this);
     }
 

@@ -10,27 +10,27 @@ let headers = new Headers({ 'Content-Type': 'application/json' });
 let options = new RequestOptions({ headers: headers, withCredentials: true });
 
 @Injectable()
-export class ProfileService {
-  BASE_URL: string = 'http://localhost:3000/api/profiles';
+export class RelationService {
+  BASE_URL: string = 'http://localhost:3000/api/relations';
   constructor(private http: Http) { }
 
   handleError(e) {
     return Observable.throw(e.message);
   }
 
-  save(user) {
-    return this.http.post(`${this.BASE_URL}/`, user, options)
+  accept(id) {
+    return this.http.post(`${this.BASE_URL}/accept`, { 'id': id }, options)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  get(id) {
-    return this.http.get(`${this.BASE_URL}/${id}`)
-      .map((res) => res.json())
+  askContact(id) {
+    return this.http.post(`${this.BASE_URL}/ask`, { 'id': id }, options)
+      .map(res => res.json())
       .catch(this.handleError);
   }
 
-  search() {
+  getRelations() {
     return this.http.get(`${this.BASE_URL}/`, options)
       .map(res => res.json())
       .catch(this.handleError);

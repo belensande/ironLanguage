@@ -1,0 +1,60 @@
+<div class="alert alert-danger" *ngIf="error">
+  {{error}}
+</div>
+<div [hidden]="!currentUser" class="row">
+  <div class="col-sm-12">
+    <h3>
+      Relations
+    </h3>
+  </div>
+  <div class="col-sm-8">
+    <div class="list-group">
+      <div class="list-group-item title">
+        <span>Contacts</span>
+      </div>
+      <div *ngIf="!currentUser.relations || !currentUser.relations.length" class="list-group-item">
+        <span>No contacts found</span>
+      </div>
+      <div *ngFor="let relation of currentUser.relations" class="list-group-item">
+        <div class="row">
+          <div class="col-xs-12 container-separated-items">
+            <div class="inline-content">
+              <div>
+                <a [routerLink]="['/profile', {id: relation._id}]">
+                  <img class="little-profile" [src]="BASE_URL + relation.imageUrl" [alt]="relation.username" [title]="relation.username" />
+                </a>
+              </div>
+              <div>
+                <div>
+                  <span class="space-right">
+                    {{relation.username}}
+                  </span>
+                  <span *ngFor="let lang of relation.languagesOffered">{{lang}}</span>
+                </div>
+                <div>
+                  <small *ngIf="messages[relation._id]">
+                    {{messages[relation._id][0].date | date:'medium'}}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="list-group">
+      <div class="list-group-item title">
+        <span>Requests</span>
+      </div>
+      <div *ngIf="!currentUser.petitions || !currentUser.petitions.length" class="list-group-item">
+        <span>No requests found</span>
+      </div>
+      <div *ngFor="let petition of currentUser.petitions" class="list-group-item">
+        <a [routerLink]="['/profile', {id: user._id}]">{{petition.name}}</a>
+        <a href="javascript:;" (click)="accept()">accept</a>
+      </div>
+    </div>
+  </div>
+</div>

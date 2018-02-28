@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { SessionService } from "./services/session.service";
 import { CollectionsService } from "./services/collections.service";
 import { ProfileService } from "./services/profile.service";
+import { RelationService } from "./services/relation.service";
 import { RouterModule } from "@angular/router";
 import { FileSelectDirective } from "ng2-file-upload";
 import { routes } from './routes';
@@ -14,6 +15,7 @@ import { AuthSignupComponent } from './auth-signup/auth-signup.component';
 import { MyPrivatePageComponent } from './my-private-page/my-private-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileSearchComponent } from './profile-search/profile-search.component';
+import { RelationsComponent } from './relations/relations.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ProfileSearchComponent } from './profile-search/profile-search.componen
     MyPrivatePageComponent,
     FileSelectDirective,
     ProfileComponent,
-    ProfileSearchComponent
+    ProfileSearchComponent,
+    RelationsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { ProfileSearchComponent } from './profile-search/profile-search.componen
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [SessionService, CollectionsService, ProfileService],
+  providers: [SessionService, CollectionsService, ProfileService, RelationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

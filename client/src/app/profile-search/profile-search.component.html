@@ -34,26 +34,16 @@
       <div class="form-group col-sm-6">
         <label for="languagesOffered" class="control-label">Offered languages</label>
         <ol class="list-group" id="languagesOffered">
-          <li *ngFor="let language of languages" class="list-group-item" [ngClass]="{'active': selectedLanguage('languagesOffered', language._id)}" (click)="toogleSelectedLanguage('languagesOffered', language._id)">
-            <div class="container-vertically-aligned">
-              <img class="flag" [src]="BASE_URL + language.flagImgPath" />
-              <span>
-                {{language.name}}
-              </span>
-            </div>
+          <li *ngFor="let language of languages" class="list-group-item" [ngClass]="{'active': selectedLanguage('languagesOffered', language)}" (click)="toogleSelectedLanguage('languagesOffered', language)">
+            {{language}}
           </li>
         </ol>
       </div>
       <div class="form-group col-sm-6">
         <label for="languagesDemanded" class="control-label">Demanded languages</label>
         <ol class="list-group" id="languagesDemanded">
-          <li *ngFor="let language of languages" class="list-group-item" [ngClass]="{'active': selectedLanguage('languagesDemanded', language._id)}" (click)="toogleSelectedLanguage('languagesDemanded', language._id)">
-            <div class="container-vertically-aligned">
-              <img class="flag" [src]="BASE_URL + language.flagImgPath" />
-              <span>
-                {{language.name}}
-              </span>
-            </div>
+          <li *ngFor="let language of languages" class="list-group-item" [ngClass]="{'active': selectedLanguage('languagesDemanded', language)}" (click)="toogleSelectedLanguage('languagesDemanded', language)">
+            {{language}}
           </li>
         </ol>
       </div>
@@ -86,10 +76,10 @@
           <div class="col-xs-4 col-sm-2"><a [routerLink]="['/profile', {id: user._id}]">{{user.username}}</a></div>
           <div class="hidden-xs col-sm-4"><span>{{user.name}}</span></div>
           <div class="col-xs-4 col-sm-3 wrappable-content">
-            <div class="container-vertically-aligned" *ngFor="let lang of user.languagesOffered"><img class="flag" [src]="BASE_URL + lang.flagImgPath" [alt]="lang.name" [title]="lang.name" /><span class="hidden-xs">{{lang.name}}</span></div>
+            <div *ngFor="let lang of user.languagesOffered"><span>{{lang}}</span></div>
           </div>
           <div class="col-xs-4 col-sm-3 wrappable-content">
-            <div class="container-vertically-aligned" *ngFor="let lang of user.languagesDemanded"><img class="flag" [src]="BASE_URL + lang.flagImgPath" [alt]="lang.name" [title]="lang.name" /><span class="hidden-xs">{{lang.name}}</span></div>
+            <div *ngFor="let lang of user.languagesDemanded"><span>{{lang}}</span></div>
           </div>
         </div>
       </div>

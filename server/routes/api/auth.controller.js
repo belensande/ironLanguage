@@ -86,10 +86,7 @@ router.get("/logout", (req, res, next) => {
 
 router.get("/loggedin", (req, res) => {
 	if (req.isAuthenticated()) {
-		User.populate(req.user, { path: "languagesOffered languagesDemanded", model: 'Language' }, (err, completeUser) => {
-			if (err || !completeUser) return res.status(500).json({ message: 'Something went wrong' });
-			return res.status(200).json(completeUser);
-		});
+		return res.status(200).json(req.user);
 	} else {
 		return res.status(200).json(false);
 	}

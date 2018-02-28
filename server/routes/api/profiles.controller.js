@@ -63,13 +63,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
 	}
 
 	User.findByIdAndUpdate(req.user.id, { $set: userInfo }, { new: true })
-		.populate({
-			path: 'languagesOffered',
-			model: 'Language'
-		}).populate({
-			path: 'languagesDemanded',
-			model: 'Language'
-		}).exec((err, newUser) => {
+		.exec((err, newUser) => {
 			if (err || !newUser) {
 				return res.status(500).json({ message: "Somethihg went wrong" });
 			}
@@ -82,14 +76,8 @@ router.post("/", upload.single('file'), (req, res, next) => {
 });
 
 router.get('/:id', function (req, res, next) {
-	User.findById(req.params.id)
-		.populate({
-			path: 'languagesOffered',
-			model: 'Language'
-		}).populate({
-			path: 'languagesDemanded',
-			model: 'Language'
-		}).exec((err, user) => {
+	User.findById(req.params.id).exec(
+		(err, user) => {
 			if (err || !user) {
 				return res.status(500).json({ message: "Somethihg went wrong" });
 			}
@@ -99,13 +87,7 @@ router.get('/:id', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
 
-	User.find({}).populate({
-		path: 'languagesOffered',
-		model: 'Language'
-	}).populate({
-		path: 'languagesDemanded',
-		model: 'Language'
-	}).exec(
+	User.find({}).exec(
 		(err, users) => {
 			if (err) {
 				return res.status(500).json({ message: "Somethihg went wrong" });

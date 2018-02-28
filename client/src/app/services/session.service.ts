@@ -15,7 +15,7 @@ export class SessionService {
   constructor(private http: Http) { }
 
   handleError(e) {
-    return Observable.throw(e.json().message);
+    return Observable.throw(e.message);
   }
 
   signup(user) {

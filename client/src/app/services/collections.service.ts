@@ -15,7 +15,7 @@ export class CollectionsService {
   constructor(private http: Http) { }
 
   handleError(e) {
-    return Observable.throw(e.json().message);
+    return Observable.throw(e.message);
   }
 
   getLanguages() {

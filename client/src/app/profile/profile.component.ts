@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from "./../services/session.service";
 import { ProfileService } from "./../services/profile.service";
+import { RelationService } from "./../services/relation.service";
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
   user: any;
   error: string;
 
-  constructor(private session: SessionService, private profile: ProfileService, private router: Router,
+  constructor(private session: SessionService, private relation: RelationService, private profile: ProfileService, private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -37,6 +38,22 @@ export class ProfileComponent implements OnInit {
             }
           });
         }
+      });
+  }
+
+  accept() {
+    this.relation.accept(this.user._id)
+      .subscribe(
+        (user) => {
+          this.currentUser = user;
+      });
+  }
+
+  askContact() {
+    this.relation.askContact(this.user._id)
+      .subscribe(
+      (user) => {
+        this.user = user;
       });
   }
 

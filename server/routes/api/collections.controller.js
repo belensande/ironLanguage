@@ -2,19 +2,14 @@ const express        = require("express");
 const router		 = express.Router();
 
 const User = require("../../models/user");
-const Language = require("../../models/language");
 
 const genders = User.schema.path('gender').enumValues;
 const cities = User.schema.path('city').enumValues;
+const languages = User.schema.path('languagesOffered').options.enum;
 
 router.get("/languages", (req, res, next) => {
-	Language.find({})
-		.then(languages => {
-			return res.status(200).json(languages);
-		})
-		.catch(e => {
-			return res.status(500).json(e);
-		});
+	const langs = languages;
+	return res.status(200).json(langs);
 });
 
 router.get("/cities", (req, res, next) => {
